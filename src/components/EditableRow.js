@@ -3,7 +3,7 @@ import React from "react";
 const EditableRow = ({
   editFormData,
   handleEditFormChange,
-  handleCancelClick,
+  handleCancelClick
 }) => {
   return (
     <tr>
@@ -11,7 +11,7 @@ const EditableRow = ({
         <input
           type="text"
           required="required"
-          placeholder="Enter a name..."
+          placeholder="Please enter the ingredient name"
           name="fullName"
           value={editFormData.fullName}
           onChange={handleEditFormChange}
@@ -21,7 +21,7 @@ const EditableRow = ({
         <input
           type="text"
           required="required"
-          placeholder="Enter an address..."
+          placeholder="Please enter the ingredient name"
           name="address"
           value={editFormData.address}
           onChange={handleEditFormChange}
