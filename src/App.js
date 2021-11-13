@@ -1,27 +1,23 @@
 import React, { useState, Fragment } from "react";
-import { nanoid } from "nanoid";
+import nanoid from "nanoid";
 import "./App.css";
 import data from "./mock-data.json";
 import ReadOnlyRow from "./components/ReadOnlyRow";
 import EditableRow from "./components/EditableRow";
 
 const App = () => {
-  const [contacts, setContacts] = useState(data);
+  const [ingredients, setIngredients] = useState(data);
   const [addFormData, setAddFormData] = useState({
-    fullName: "",
-    address: "",
-    phoneNumber: "",
-    email: "",
+    ingredientName: "",
+    amount: ""
   });
 
   const [editFormData, setEditFormData] = useState({
-    fullName: "",
-    address: "",
-    phoneNumber: "",
-    email: "",
+    ingredientName: "",
+    amount: ""
   });
 
-  const [editContactId, setEditContactId] = useState(null);
+  const [editIngredientId, setEditIngredientId] = useState(null);
 
   const handleAddFormChange = (event) => {
     event.preventDefault();
@@ -50,65 +46,61 @@ const App = () => {
   const handleAddFormSubmit = (event) => {
     event.preventDefault();
 
-    const newContact = {
-      id: nanoid(),
-      fullName: addFormData.fullName,
-      address: addFormData.address,
-      phoneNumber: addFormData.phoneNumber,
-      email: addFormData.email,
+    const newIngredient = {
+      id: nanoid,
+      ingredientName: addFormData.ingredientName,
+      amount: addFormData.amount
     };
 
-    const newContacts = [...contacts, newContact];
-    setContacts(newContacts);
+    const newContacts = [...ingredients, newIngredient];
+    setIngredients(newContacts);
   };
 
   const handleEditFormSubmit = (event) => {
     event.preventDefault();
 
     const editedContact = {
-      id: editContactId,
-      fullName: editFormData.fullName,
-      address: editFormData.address,
-      phoneNumber: editFormData.phoneNumber,
-      email: editFormData.email,
+      id: editIngredientId,
+      ingredientName: editFormData.ingredientName,
+      amount: editFormData.amount
     };
 
-    const newContacts = [...contacts];
+    const newContacts = [...ingredients];
 
-    const index = contacts.findIndex((contact) => contact.id === editContactId);
+    const index = ingredients.findIndex(
+      (ingredient) => ingredient.id === editIngredientId
+    );
 
     newContacts[index] = editedContact;
 
-    setContacts(newContacts);
-    setEditContactId(null);
+    setIngredients(newContacts);
+    setEditIngredientId(null);
   };
 
   const handleEditClick = (event, contact) => {
     event.preventDefault();
-    setEditContactId(contact.id);
+    setEditIngredientId(contact.id);
 
     const formValues = {
-      fullName: contact.fullName,
-      address: contact.address,
-      phoneNumber: contact.phoneNumber,
-      email: contact.email,
+      ingredientName: contact.ingredientName,
+      amount: contact.amount
     };
 
     setEditFormData(formValues);
   };
 
   const handleCancelClick = () => {
-    setEditContactId(null);
+    setEditIngredientId(null);
   };
 
   const handleDeleteClick = (contactId) => {
-    const newContacts = [...contacts];
+    const newContacts = [...ingredients];
 
-    const index = contacts.findIndex((contact) => contact.id === contactId);
+    const index = ingredients.findIndex((contact) => contact.id === contactId);
 
     newContacts.splice(index, 1);
 
-    setContacts(newContacts);
+    setIngredients(newContacts);
   };
 
   return (
@@ -117,17 +109,15 @@ const App = () => {
         <table>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Address</th>
-              <th>Phone Number</th>
-              <th>Email</th>
+              <th>Ingredient Name</th>
+              <th>Amount</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {contacts.map((contact) => (
+            {ingredients.map((ingredient) => (
               <Fragment>
-                {editContactId === contact.id ? (
+                {editIngredientId === ingredient.id ? (
                   <EditableRow
                     editFormData={editFormData}
                     handleEditFormChange={handleEditFormChange}
@@ -135,7 +125,7 @@ const App = () => {
                   />
                 ) : (
                   <ReadOnlyRow
-                    contact={contact}
+                    ingredient={ingredient}
                     handleEditClick={handleEditClick}
                     handleDeleteClick={handleDeleteClick}
                   />
@@ -146,34 +136,20 @@ const App = () => {
         </table>
       </form>
 
-      <h2>Add a Contact</h2>
+      <h2>Add Ingredient</h2>
       <form onSubmit={handleAddFormSubmit}>
         <input
           type="text"
           name="fullName"
           required="required"
-          placeholder="Enter a name..."
+          placeholder="Please enter the ingredient name"
           onChange={handleAddFormChange}
         />
         <input
           type="text"
-          name="address"
+          name="amount"
           required="required"
-          placeholder="Enter an addres..."
-          onChange={handleAddFormChange}
-        />
-        <input
-          type="text"
-          name="phoneNumber"
-          required="required"
-          placeholder="Enter a phone number..."
-          onChange={handleAddFormChange}
-        />
-        <input
-          type="email"
-          name="email"
-          required="required"
-          placeholder="Enter an email..."
+          placeholder="Please enter the amount"
           onChange={handleAddFormChange}
         />
         <button type="submit">Add</button>
