@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from "react";
+import nanoid from "nanoid";
 import "./App.css";
 import data from "./mock-data.json";
 import ReadOnlyRow from "./components/ReadOnlyRow";
@@ -7,13 +8,13 @@ import EditableRow from "./components/EditableRow";
 const App = () => {
   const [contacts, setContacts] = useState(data);
   const [addFormData, setAddFormData] = useState({
-    fullName: "",
-    address: ""
+    ingredientName: "",
+    amount: ""
   });
 
   const [editFormData, setEditFormData] = useState({
-    fullName: "",
-    address: ""
+    ingredientName: "",
+    amount: ""
   });
 
   const [editContactId, setEditContactId] = useState(null);
@@ -46,8 +47,9 @@ const App = () => {
     event.preventDefault();
 
     const newContact = {
-      fullName: addFormData.fullName,
-      address: addFormData.address
+      id: nanoid,
+      ingredientName: addFormData.ingredientName,
+      amount: addFormData.amount
     };
 
     const newContacts = [...contacts, newContact];
@@ -58,8 +60,9 @@ const App = () => {
     event.preventDefault();
 
     const editedContact = {
-      fullName: editFormData.fullName,
-      address: editFormData.address
+      id: editContactId,
+      ingredientName: editFormData.ingredientName,
+      amount: editFormData.amount
     };
 
     const newContacts = [...contacts];
@@ -77,8 +80,8 @@ const App = () => {
     setEditContactId(contact.id);
 
     const formValues = {
-      fullName: contact.fullName,
-      address: contact.address
+      ingredientName: contact.ingredientName,
+      amount: contact.amount
     };
 
     setEditFormData(formValues);
@@ -104,8 +107,8 @@ const App = () => {
         <table>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Address</th>
+              <th>Ingredient Name</th>
+              <th>Amount</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -142,7 +145,7 @@ const App = () => {
         />
         <input
           type="text"
-          name="address"
+          name="amount"
           required="required"
           placeholder="Please enter the amount"
           onChange={handleAddFormChange}

@@ -13,7 +13,7 @@ const EditableRow = ({
           required="required"
           placeholder="Please enter the ingredient name"
           name="ingredientName"
-          value={editFormData.fullName}
+          value={editFormData.ingredientName}
           onChange={handleEditFormChange}
         ></input>
       </td>
@@ -23,7 +23,7 @@ const EditableRow = ({
           required="required"
           placeholder="Please enter the amount"
           name="amount"
-          value={editFormData.address}
+          value={editFormData.amount}
           onChange={handleEditFormChange}
         ></input>
       </td>
