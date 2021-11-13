@@ -125,7 +125,7 @@ const App = () => {
                   />
                 ) : (
                   <ReadOnlyRow
-                    contact={ingredient}
+                    ingredient={ingredient}
                     handleEditClick={handleEditClick}
                     handleDeleteClick={handleDeleteClick}
                   />
