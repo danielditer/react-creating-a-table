@@ -1,5 +1,4 @@
 import React, { useState, Fragment } from "react";
-import { nanoid } from "nanoid";
 import "./App.css";
 import data from "./mock-data.json";
 import ReadOnlyRow from "./components/ReadOnlyRow";
@@ -9,16 +8,12 @@ const App = () => {
   const [contacts, setContacts] = useState(data);
   const [addFormData, setAddFormData] = useState({
     fullName: "",
-    address: "",
-    phoneNumber: "",
-    email: "",
+    address: ""
   });
 
   const [editFormData, setEditFormData] = useState({
     fullName: "",
-    address: "",
-    phoneNumber: "",
-    email: "",
+    address: ""
   });
 
   const [editContactId, setEditContactId] = useState(null);
@@ -51,11 +46,8 @@ const App = () => {
     event.preventDefault();
 
     const newContact = {
-      id: nanoid(),
       fullName: addFormData.fullName,
-      address: addFormData.address,
-      phoneNumber: addFormData.phoneNumber,
-      email: addFormData.email,
+      address: addFormData.address
     };
 
     const newContacts = [...contacts, newContact];
@@ -66,11 +58,8 @@ const App = () => {
     event.preventDefault();
 
     const editedContact = {
-      id: editContactId,
       fullName: editFormData.fullName,
-      address: editFormData.address,
-      phoneNumber: editFormData.phoneNumber,
-      email: editFormData.email,
+      address: editFormData.address
     };
 
     const newContacts = [...contacts];
@@ -89,9 +78,7 @@ const App = () => {
 
     const formValues = {
       fullName: contact.fullName,
-      address: contact.address,
-      phoneNumber: contact.phoneNumber,
-      email: contact.email,
+      address: contact.address
     };
 
     setEditFormData(formValues);
@@ -119,8 +106,6 @@ const App = () => {
             <tr>
               <th>Name</th>
               <th>Address</th>
-              <th>Phone Number</th>
-              <th>Email</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -146,34 +131,20 @@ const App = () => {
         </table>
       </form>
 
-      <h2>Add a Contact</h2>
+      <h2>Add Ingredient</h2>
       <form onSubmit={handleAddFormSubmit}>
         <input
           type="text"
           name="fullName"
           required="required"
-          placeholder="Enter a name..."
+          placeholder="Please enter the ingredient name"
           onChange={handleAddFormChange}
         />
         <input
           type="text"
           name="address"
           required="required"
-          placeholder="Enter an addres..."
-          onChange={handleAddFormChange}
-        />
-        <input
-          type="text"
-          name="phoneNumber"
-          required="required"
-          placeholder="Enter a phone number..."
-          onChange={handleAddFormChange}
-        />
-        <input
-          type="email"
-          name="email"
-          required="required"
-          placeholder="Enter an email..."
+          placeholder="Please enter the amount"
           onChange={handleAddFormChange}
         />
         <button type="submit">Add</button>

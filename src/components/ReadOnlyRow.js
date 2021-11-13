@@ -5,8 +5,6 @@ const ReadOnlyRow = ({ contact, handleEditClick, handleDeleteClick }) => {
     <tr>
       <td>{contact.fullName}</td>
       <td>{contact.address}</td>
-      <td>{contact.phoneNumber}</td>
-      <td>{contact.email}</td>
       <td>
         <button
           type="button"
